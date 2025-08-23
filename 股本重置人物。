@@ -1,0 +1,42 @@
+-- 死亡后UI不消失 + 关闭按钮功能
+local player = game.Players.LocalPlayer
+
+-- 创建ScreenGui，不随角色重生消失
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "TeleportToVoidUI"
+screenGui.ResetOnSpawn = false -- 关键：角色重生后UI还在
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- 自杀按钮
+local suicideButton = Instance.new("TextButton")
+suicideButton.Size = UDim2.new(0, 200, 0, 50)
+suicideButton.Position = UDim2.new(0.5, -100, 0.8, 0)
+suicideButton.Text = "重置人物"
+suicideButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+suicideButton.TextColor3 = Color3.new(1, 1, 1)
+suicideButton.Font = Enum.Font.SourceSansBold
+suicideButton.TextSize = 24
+suicideButton.Parent = screenGui
+
+-- 关闭按钮
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 40, 0, 40)
+closeButton.Position = UDim2.new(0.5, 110, 0.8, 5)
+closeButton.Text = "关闭"
+closeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 28
+closeButton.Parent = screenGui
+
+-- 自杀按钮点击事件
+suicideButton.MouseButton1Click:Connect(function()
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(0, -975, 0)
+    end
+end)
+
+-- 关闭按钮点击事件
+closeButton.MouseButton1Click:Connect(function()
+    screenGui.Enabled = false
+end)
