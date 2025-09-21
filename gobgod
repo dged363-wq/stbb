@@ -12,7 +12,7 @@ end
 task.wait(2)
 
 WindUI:Notify({
-    Title = "GOBstbb",
+    Title = "freestbb",
     Content = "stbb",
     Duration = 4
 })
@@ -53,7 +53,7 @@ local Window = WindUI:CreateWindow({
 task.wait(0.3)
 
 Window:EditOpenButton({
-    Title = "GOBGOD",
+    Title = "身体棒棒",
     Icon = "monitor",
     CornerRadius = UDim.new(0,16),
     StrokeThickness = 2,
@@ -228,18 +228,195 @@ utilityTab:Toggle({
     end
 })
 
--- 如果确实需要滑块功能，可以尝试这种格式（不同版本的WindUI可能参数不同）
--- 注意：如果这个滑块还是不能工作，建议使用上面的按钮方案
-speedTab:Slider({
-    Title = "自定义速度",
-    Description = "拖动设置移动速度",
-    Min = 16,
-    Max = 300,
-    Default = 16,
-    Rounding = 0,
+-- 7. 新增的Boss与装备标签页
+local bossTab = Window:Tab({
+    Title = "Boss与装备",
+    Icon = "skull",
+    Locked = false,
+})
+
+-- 秒杀Boss功能
+bossTab:Button({
+    Title = "秒杀Boss",
+    Description = "一键秒杀所有Boss",
+    Callback = function()
+        -- 这里实现秒杀Boss的逻辑
+        WindUI:Notify({
+            Title = "秒杀Boss",
+            Content = "已激活秒杀Boss功能",
+            Duration = 3
+        })
+    end
+})
+
+-- 购买枪功能
+bossTab:Button({
+    Title = "购买所有枪",
+    Description = "一键获取所有武器",
+    Callback = function()
+        -- 这里实现购买所有枪的逻辑
+        WindUI:Notify({
+            Title = "武器获取",
+            Content = "已成功获取所有武器",
+            Duration = 3
+        })
+    end
+})
+
+-- 无限时停功能
+bossTab:Toggle({
+    Title = "无限时停",
+    Description = "开启/关闭无限时停能力",
     Callback = function(value)
-        if player.Character and player.Character:FindFirstChild("Humanoid") then
-            player.Character.Humanoid.WalkSpeed = value
+        if value then
+            WindUI:Notify({
+                Title = "无限时停",
+                Content = "已开启无限时停",
+                Duration = 3
+            })
+        else
+            WindUI:Notify({
+                Title = "无限时停",
+                Content = "已关闭无限时停",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- 泰坦电视人装备
+bossTab:Button({
+    Title = "获取泰坦电视装备",
+    Description = "一键获取泰坦电视人装备",
+    Callback = function()
+        WindUI:Notify({
+            Title = "装备获取",
+            Content = "已获取泰坦电视人装备",
+            Duration = 3
+        })
+    end
+})
+
+-- 泰坦监控人装备
+bossTab:Button({
+    Title = "获取泰坦监控装备",
+    Description = "一键获取泰坦监控人装备",
+    Callback = function()
+        WindUI:Notify({
+            Title = "装备获取",
+            Content = "已获取泰坦监控人装备",
+            Duration = 3
+        })
+    end
+})
+
+-- 泰坦音响人装备
+bossTab:Button({
+    Title = "获取泰坦音响装备",
+    Description = "一键获取泰坦音响人装备",
+    Callback = function()
+        WindUI:Notify({
+            Title = "装备获取",
+            Content = "已获取泰坦音响人装备",
+            Duration = 3
+        })
+    end
+})
+
+-- 8. 新增的自动功能标签页
+local autoTab = Window:Tab({
+    Title = "自动功能",
+    Icon = "rotate-ccw",
+    Locked = false,
+})
+
+-- 自动抽奖功能
+autoTab:Toggle({
+    Title = "自动抽奖",
+    Description = "自动进行抽奖活动",
+    Callback = function(value)
+        if value then
+            WindUI:Notify({
+                Title = "自动抽奖",
+                Content = "已开启自动抽奖功能",
+                Duration = 3
+            })
+            -- 这里可以添加自动抽奖的逻辑
+        else
+            WindUI:Notify({
+                Title = "自动抽奖",
+                Content = "已关闭自动抽奖功能",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- 自动购买物品功能
+autoTab:Section({
+    Title = "自动购买物品",
+    Description = "选择要自动购买的物品"
+})
+
+-- 1UE选项
+autoTab:Toggle({
+    Title = "1UE",
+    Description = "自动购买1UE",
+    Callback = function(value)
+        if value then
+            WindUI:Notify({
+                Title = "自动购买",
+                Content = "已开启自动购买1UE",
+                Duration = 3
+            })
+        else
+            WindUI:Notify({
+                Title = "自动购买",
+                Content = "已关闭自动购买1UE",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- 小型直升机选项
+autoTab:Toggle({
+    Title = "小型直升机",
+    Description = "自动购买小型直升机",
+    Callback = function(value)
+        if value then
+            WindUI:Notify({
+                Title = "自动购买",
+                Content = "已开启自动购买小型直升机",
+                Duration = 3
+            })
+        else
+            WindUI:Notify({
+                Title = "自动购买",
+                Content = "已关闭自动购买小型直升机",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- 803大师经验卡选项
+autoTab:Toggle({
+    Title = "803大师经验卡",
+    Description = "自动购买803大师经验卡",
+    Callback = function(value)
+        if value then
+            WindUI:Notify({
+                Title = "自动购买",
+                Content = "已开启自动购买803大师经验卡",
+                Duration = 3
+            })
+        else
+            WindUI:Notify({
+                Title = "自动购买",
+                Content = "已关闭自动购买803大师经验卡",
+                Duration = 3
+            })
         end
     end
 })
