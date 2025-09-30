@@ -1,0 +1,323 @@
+--Kenny泛滥外部汉化脚本我的哔站UID:1531514159（删了这个死妈死爹死全家）
+local Translations = {
+    -- ==================== DYHUB Blockade Battlefront 翻译 ====================
+    -- 主菜单标签
+    ["Collect"] = "收集",
+    ["Hubox"] = "攻击盒",
+    ["Hibox"] = "攻击盒",
+    ["Quest"] = "任务",
+    ["Mastery"] = "精通",
+    ["Codes"] = "代码",
+    ["Shop"] = "商店",
+    ["Show"] = "显示",
+    ["Skill"] = "技能",
+    ["Esp"] = "透视",
+    ["Hitbox"] = "命中框",
+    ["Main"] = "主菜单",
+    ["Player"] = "玩家",
+    ["Gamepass"] = "游戏通行证",
+    ["Misc"] = "杂项",
+    ["Information"] = "信息",
+    
+    -- 通用术语
+    ["DYHUB"] = "DYHUB汉化",
+    ["ST : Blockade Battlefront | Free Vee"] = "ST : 封锁前线 | 免费版",
+    ["ST : Blockade Battlefront | Free V8"] = "ST : 封锁前线 | 免费版",
+    ["ST : Blockade Battlefront | Free V"] = "ST : 封锁前线 | 免费版",
+    
+    -- 功能设置
+    ["Feature Visual"] = "视觉功能",
+    ["Full Bright"] = "全亮",
+    ["No Fog"] = "无雾",
+    ["Vibrant Colors"] = "鲜艳色彩",
+    ["FPS Boost Settings"] = "FPS提升设置",
+    ["Show FPS"] = "显示FPS",
+    ["Show Ping (ms)"] = "显示延迟(毫秒)",
+    ["FPS Boost (Fixed)"] = "FPS提升(修复版)",
+    
+    ["Feature Gamepass"] = "游戏通行证功能",
+    ["Unlock gamepass for real!"] = "真正解锁游戏通行证!",
+    ["Select Gar"] = "选择装备",
+    ["Select Gamepass"] = "选择游戏通行证",
+    ["Unlock Selected Gamepass"] = "解锁选定的游戏通行证",
+    ["LuckyBoost"] = "幸运提升",
+    ["Unlock Se"] = "解锁选择",
+    ["RareLuckyBoost"] = "稀有幸运提升",
+    ["LegendaryLuckyBoost"] = "传奇幸运提升",
+    ["All"] = "全部",
+    
+    -- 扭蛋功能
+    ["Feature Gacha"] = "扭蛋功能",
+    ["Select Gacha"] = "选择扭蛋",
+    ["Character Spins"] = "角色旋转",
+    ["Auto Gacha Character"] = "自动扭蛋角色",
+    ["Select Gacha Skin Spins"] = "选择皮肤扭蛋旋转",
+    ["Auto Gacha Skin"] = "自动扭蛋皮肤",
+    ["Select Gac+"] = "选择扭蛋+",
+    ["Auto Gacl"] = "自动扭蛋",
+    ["1SpinLucky"] = "1次幸运旋转",
+    ["1Spin"] = "1次旋转",
+    ["10Spins"] = "10次旋转",
+    ["Auto Gael"] = "自动扭蛋",
+    ["Select Ga Spins"] = "选择扭蛋旋转",
+    ["Auto Gach."] = "自动扭蛋",
+    
+    -- 代码功能
+    ["Feature Code"] = "代码功能",
+    ["Select Redeem Codes"] = "选择兑换代码",
+    ["Redeem Selected Codes"] = "兑换选定代码",
+    ["Redeem Code All"] = "兑换所有代码",
+    
+    -- 精通功能
+    ["Feature Mastery"] = "精通功能",
+    ["Movement"] = "移动",
+    ["Action Speed"] = "动作速度",
+    ["Character List"] = "角色列表",
+    ["Set Position"] = "设置位置",
+    ["Set Distance to NPC"] = "设置NPC距离",
+    ["Set Distance to NPC 1"] = "设置NPC距离 1",
+    ["Auto Mastery (No Flush)"] = "自动精通(无刷新)",
+    ["Auto Mastery (Flush)"] = "自动精通(刷新)",
+    
+    -- 任务功能
+    ["Feature Quest"] = "任务功能",
+    ["Setting Auto Quest"] = "设置自动任务",
+    ["Auto Farm (Upgrade)"] = "自动刷怪(升级)",
+    ["Auto Quest Collect (Beta)"] = "自动任务收集(测试版)",
+    ["Auto Quest Skip (Need Robux)"] = "自动任务跳过(需要Robux)",
+    ["Open Menu (Quest Clock-Man)"] = "打开菜单(任务时钟人)",
+    ["Open Menu (Quest)"] = "打开菜单(任务)",
+    
+    -- 命中框功能
+    ["Feature Hitbox"] = "命中框功能",
+    ["Scan Humanoid"] = "扫描人形",
+    ["Set Size Hitbox"] = "设置命中框大小",
+    ["Enable Hitbox"] = "启用命中框",
+    ["Show Hitbox (Transparency)"] = "显示命中框(透明)",
+    
+    -- 收集功能
+    ["Feature Collect"] = "收集功能",
+    ["Set Collect Items"] = "设置收集物品",
+    ["Get Collect Items"] = "获取收集物品",
+    ["Auto Collect"] = "自动收集",
+    ["Auto Colt"] = "自动收集",
+    ["Item Notify"] = "物品通知",
+    ["Item Notif"] = "物品通知",
+    
+    -- 透视功能
+    ["Feature Esp"] = "透视功能",
+    ["ESP Mode"] = "透视模式",
+    ["ESP (Enemies)"] = "透视(敌人)",
+    ["ESP (Players)"] = "透视(玩家)",
+    ["ESP Setting"] = "透视设置",
+    ["ESP Name"] = "透视名称",
+    ["ESP Health"] = "透视生命值",
+    ["ESP Distance"] = "透视距离",
+    
+    -- 技能功能
+    ["Feature Skill"] = "技能功能",
+    ["Set Auto Skill"] = "设置自动技能",
+    ["Auto Skill"] = "自动技能",
+    
+    -- 玩家功能
+    ["Feature Player"] = "玩家功能",
+    ["Player Misc"] = "玩家杂项",
+    ["No Clip"] = "穿墙模式",
+    ["Infinity Jump"] = "无限跳跃",
+    ["Fly (Beta)"] = "飞行(测试版)",
+    ["Enable JumpPower"] = "启用跳跃力量",
+    ["Set Speed Value"] = "设置速度值",
+    ["Enable Speed"] = "启用速度",
+    ["Set Jump Value"] = "设置跳跃值",
+    ["Open Menu (Helicopter)"] = "打开菜单(直升机)",
+    
+    -- 游戏功能
+    ["Feature Play"] = "游戏功能",
+    ["Auto Ready"] = "自动准备",
+    ["Auto Skip Helicopter"] = "自动跳过直升机",
+    ["Feature Vote"] = "投票功能",
+    ["Set Vote"] = "设置投票",
+    ["Auto Vote"] = "自动投票",
+    
+    ["Feature Farm"] = "刷怪功能",
+    ["Flush Aura (Upgrade)"] = "刷新光环(升级)",
+    
+    -- 商店相关
+    ["Hourly Shop (Beta)"] = "每小时商店(测试版)",
+    ["Set Auto Buy"] = "设置自动购买",
+    ["Set Auto Buy Items"] = "设置自动购买物品",
+    ["Set Amount Buy Items"] = "设置购买物品数量",
+    ["Auto Buy"] = "自动购买",
+    
+    -- 新截图添加的翻译
+    ["GoB"] = "游戏ID",
+    ["Main Owner"] = "主要所有者",
+    ["Social"] = "社交",
+    ["Copy link social media for follow!"] = "复制社交媒体链接以关注!",
+    ["Copy Link"] = "复制链接",
+    ["Discord"] = "Discord",
+    ["Join our discord for more scripts!"] = "加入我们的Discord获取更多脚本!",
+    
+    ["DYHUB | SK+"] = "DYHUB | SK+",
+    ["Member Count"] = "成员数量",
+    ["Online Count"] = "在线数量",
+    ["Update Info"] = "更新信息",
+    ["Copy Discord Invite"] = "复制Discord邀请",
+    ["DYHUB Information"] = "DYHUB信息",
+    
+    ["确认选项"] = "确认选项",
+    ["底部"] = "底部",
+    
+    -- 其他文本
+    ["GOB"] = "游戏ID",
+    ["停止旁观"] = "停止旁观",
+    ["美观"] = "美观",
+    ["停止美观"] = "停止美观",
+    ["N/A"] = "不可用",
+    ["版本 8.0.7"] = "版本 8.0.7",
+    ["更多6.0了"] = "更多6.0了",
+    ["更多8.0.7"] = "更多8.0.7",
+    ["Data Version: Bugs/Under Fixing"] = "数据版本: 错误/修复中",
+    ["按下此菜单，以更改字符"] = "按下此菜单，以更改字符",
+    ["按下此处可查看以更改字符"] = "按下此处可查看以更改字符",
+    ["按下此处，以更改字符"] = "按下此处，以更改字符",
+    ["按下此处后，以更改字符"] = "按下此处后，以更改字符",
+    ["按下此处后，以便改字符"] = "按下此处后，以便改字符",
+    ["操作此处可以通过更改字符"] = "操作此处可以通过更改字符",
+    ["插入文字栏"] = "插入文字栏",
+    ["操作面板"] = "操作面板",
+    ["操作规则"] = "操作规则",
+    ["插图"] = "插图",
+    ["东方没有准备好"] = "东方没有准备好",
+    ["东环没有准备好"] = "东环没有准备好",
+    ["你还没有准备好"] = "你还没有准备好",
+    ["价格没有准备好"] = "价格没有准备好",
+    ["循环没有准备好"] = "循环没有准备好",
+    ["布尔没有准备好"] = "布尔没有准备好",
+    ["游戏没有电击"] = "游戏没有电击",
+    ["第六步有准备者"] = "第六步有准备者",
+    ["一贯不变有档套话"] = "一贯不变有档套话",
+    
+    -- 状态信息
+    ["PPS:"] = "包/秒:",
+    ["Ping:"] = "延迟:",
+    ["FPS:"] = "帧率:",
+    ["ms"] = "毫秒"
+}
+
+-- 剩下的函数代码保持不变...
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    
+    if Translations[text] then
+        return Translations[text]
+    end
+    
+    for en, cn in pairs(Translations) do
+        if text:find(en) then
+            return text:gsub(en, cn)
+        end
+    end
+    
+    return text
+end
+
+local function setupTranslationEngine()
+    local success, err = pcall(function()
+        local oldIndex = getrawmetatable(game).__newindex
+        setreadonly(getrawmetatable(game), false)
+        
+        getrawmetatable(game).__newindex = newcclosure(function(t, k, v)
+            if (t:IsA("TextLabel") or t:IsA("TextButton") or t:IsA("TextBox")) and k == "Text" then
+                v = translateText(tostring(v))
+            end
+            return oldIndex(t, k, v)
+        end)
+        
+        setreadonly(getrawmetatable(game), true)
+    end)
+    
+    if not success then
+        warn("元表劫持失败:", err)
+       
+        local translated = {}
+        local function scanAndTranslate()
+            for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+                if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                    pcall(function()
+                        local text = gui.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                gui.Text = translatedText
+                                translated[gui] = true
+                            end
+                        end
+                    end)
+                end
+            end
+            
+            local player = game:GetService("Players").LocalPlayer
+            if player and player:FindFirstChild("PlayerGui") then
+                for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+                    if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                        pcall(function()
+                            local text = gui.Text
+                            if text and text ~= "" then
+                                local translatedText = translateText(text)
+                                if translatedText ~= text then
+                                    gui.Text = translatedText
+                                    translated[gui] = true
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end
+        
+        local function setupDescendantListener(parent)
+            parent.DescendantAdded:Connect(function(descendant)
+                if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                    task.wait(0.1)
+                    pcall(function()
+                        local text = descendant.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                descendant.Text = translatedText
+                            end
+                        end
+                    end)
+                end
+            end)
+        end
+        
+        pcall(setupDescendantListener, game:GetService("CoreGui"))
+        local player = game:GetService("Players").LocalPlayer
+        if player and player:FindFirstChild("PlayerGui") then
+            pcall(setupDescendantListener, player.PlayerGui)
+        end
+        
+        while true do
+            scanAndTranslate()
+            task.wait(3)
+        end
+    end
+end
+
+task.wait(2)
+
+setupTranslationEngine()
+
+local success, err = pcall(function()
+--这下面填加载外部脚本
+loadstring(game:HttpGet('https://pastefy.app/UZQsTykK/raw'))()
+
+
+
+end)
+
+if not success then
+    warn("加载失败:", err)
+end
