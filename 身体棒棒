@@ -1,0 +1,366 @@
+-- 加载 WindUI 库
+local success, WindUI = pcall(function()
+    return loadstring(game:HttpGet("https://raw.githubusercontent.com/Syndromehsh/Lua/refs/heads/main/AlienX/AlienX%20Wind%203.0%20UI.txt"))()
+end)
+
+-- 检查 WindUI 是否加载成功
+if not success or not WindUI then
+    warn("WindUI 加载失败，请检查网络连接或链接有效性")
+    return
+end
+
+task.wait(2)
+
+WindUI:Notify({
+    Title = "GOBstbb",
+    Content = "stbb",
+    Duration = 4
+})
+
+task.wait(0.5)
+
+local player = game.Players.LocalPlayer
+
+local Window = WindUI:CreateWindow({
+    Title = "gobstbb<font color='#00FF00'>2.0</font> / stbb",
+    Icon = "rbxassetid://4483362748",
+    IconTransparency = 1,
+    Author = "stbb",
+    Folder = "stbb",
+    Size = UDim2.fromOffset(60, 100),  -- 小尺寸
+    Transparent = true,
+    Theme = "Light",  -- 白色主题
+    UserEnabled = true,
+    SideBarWidth = 120,  -- 小侧边栏
+    HasOutline = true,
+    User = {
+        Enabled = true,
+        Anonymous = false,
+        Username = player.Name,
+        DisplayName = player.DisplayName,
+        UserId = player.UserId,
+        Thumbnail = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "&width=420&height=420&format=png",
+        Callback = function()
+            WindUI:Notify({
+                Title = "用户信息",
+                Content = "玩家: " .. player.Name .. " (" .. player.DisplayName .. ")",
+                Duration = 3
+            })
+        end
+    }
+})
+
+task.wait(0.3)
+
+Window:EditOpenButton({
+    Title = "GOBGOD",
+    Icon = "monitor",
+    CornerRadius = UDim.new(0,6),  -- 小圆角
+    StrokeThickness = 1,
+    Color = ColorSequence.new(Color3.fromRGB(240, 240, 240)),  -- 白色
+    BackgroundColor = Color3.fromRGB(255, 255, 255),  -- 白色背景
+    TextColor = Color3.fromRGB(0, 0, 0),  -- 黑色文字
+    Draggable = true,
+})
+
+task.wait(0.2)
+
+-- 其他脚本标签页
+local scriptsTab = Window:Tab({
+    Title = "其他脚本",
+    Icon = "code",
+    Locked = false,
+})
+
+-- 添加说明
+scriptsTab:Section({
+    Title = "常用脚本",
+    Description = "点击按钮加载对应脚本"
+})
+
+-- DYHUB汉化脚本
+scriptsTab:Button({
+    Title = "DYHUB汉化",
+    Description = "加载DYHUB汉化脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/dged363-wq/stbb/c9e88e4daa28d88d850620ceab4288b48256ba9f/new%F0%9F%87%A8%F0%9F%87%B3DYHUB"))()
+        WindUI:Notify({
+            Title = "脚本加载",
+            Content = "已加载DYHUB汉化脚本",
+            Duration = 3
+        })
+    end
+})
+
+-- XA通用脚本
+scriptsTab:Button({
+    Title = "XA通用脚本",
+    Description = "加载XA通用脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.gitcode.com/Xingtaiduan/Scripts/raw/main/Loader.lua"))()
+        WindUI:Notify({
+            Title = "脚本加载",
+            Content = "已加载XA通用脚本",
+            Duration = 3
+        })
+    end
+})
+
+scriptsTab:Divider()
+
+scriptsTab:Section({
+    Title = "其他脚本",
+    Description = "更多实用脚本"
+})
+
+scriptsTab:Button({
+    Title = "无限跳跃脚本",
+    Description = "加载无限跳跃脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+        WindUI:Notify({
+            Title = "脚本加载",
+            Content = "已加载无限跳跃脚本",
+            Duration = 3
+        })
+    end
+})
+
+scriptsTab:Button({
+    Title = "飞行脚本",
+    Description = "加载飞行脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGui/main/FlyGuiV3.txt"))()
+        WindUI:Notify({
+            Title = "脚本加载",
+            Content = "已加载飞行脚本",
+            Duration = 3
+        })
+    end
+})
+
+scriptsTab:Button({
+    Title = "传送脚本",
+    Description = "加载传送脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAM.lua"))()
+        WindUI:Notify({
+            Title = "脚本加载",
+            Content = "已加载传送脚本",
+            Duration = 3
+        })
+    end
+})
+
+scriptsTab:Button({
+    Title = "透视脚本",
+    Description = "加载高级透视脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE-Scripts/main/AimViewer"))()
+        WindUI:Notify({
+            Title = "脚本加载",
+            Content = "已加载透视脚本",
+            Duration = 3
+        })
+    end
+})
+
+-- 透视功能标签页
+local espTab = Window:Tab({
+    Title = "透视功能",
+    Icon = "eye",
+    Locked = false,
+})
+
+local playerESPEnabled = false
+local itemESPEnabled = false
+
+espTab:Toggle({
+    Title = "玩家透视",
+    Description = "显示其他玩家位置",
+    Callback = function(value)
+        playerESPEnabled = value
+        if value then
+            -- 玩家透视实现
+            for _, otherPlayer in ipairs(game.Players:GetPlayers()) do
+                if otherPlayer ~= player and otherPlayer.Character then
+                    local highlight = Instance.new("Highlight")
+                    highlight.Parent = otherPlayer.Character
+                    highlight.FillColor = Color3.fromRGB(255, 0, 0)
+                    highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                end
+            end
+            WindUI:Notify({
+                Title = "透视功能",
+                Content = "已开启玩家透视",
+                Duration = 3
+            })
+        else
+            -- 关闭玩家透视
+            for _, otherPlayer in ipairs(game.Players:GetPlayers()) do
+                if otherPlayer ~= player and otherPlayer.Character then
+                    local highlight = otherPlayer.Character:FindFirstChildOfClass("Highlight")
+                    if highlight then
+                        highlight:Destroy()
+                    end
+                end
+            end
+            WindUI:Notify({
+                Title = "透视功能",
+                Content = "已关闭玩家透视",
+                Duration = 3
+            })
+        end
+    end
+})
+
+espTab:Toggle({
+    Title = "物品透视",
+    Description = "显示重要物品位置",
+    Callback = function(value)
+        itemESPEnabled = value
+        if value then
+            -- 物品透视实现（查找工具和武器）
+            for _, item in ipairs(workspace:GetDescendants()) do
+                if item:IsA("Tool") or item:IsA("Part") and item.Name:lower():find("weapon") then
+                    local highlight = Instance.new("Highlight")
+                    highlight.Parent = item
+                    highlight.FillColor = Color3.fromRGB(0, 255, 0)
+                    highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                end
+            end
+            WindUI:Notify({
+                Title = "透视功能",
+                Content = "已开启物品透视",
+                Duration = 3
+            })
+        else
+            -- 关闭物品透视
+            for _, item in ipairs(workspace:GetDescendants()) do
+                local highlight = item:FindFirstChildOfClass("Highlight")
+                if highlight and (item:IsA("Tool") or item:IsA("Part") and item.Name:lower():find("weapon")) then
+                    highlight:Destroy()
+                end
+            end
+            WindUI:Notify({
+                Title = "透视功能",
+                Content = "已关闭物品透视",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- 角色控制标签页
+local Tab = Window:Tab({
+    Title = "角色控制",
+    Icon = "user",
+    Locked = false,
+})
+
+-- 1. 重置人物 - 传送角色到虚空
+Tab:Button({
+    Title = "重置人物",
+    Description = "将角色传送到虚空",
+    Callback = function()
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            player.Character.HumanoidRootPart.CFrame = CFrame.new(0, -975, 0)
+            WindUI:Notify({
+                Title = "重置人物",
+                Content = "已将角色传送到虚空",
+                Duration = 3
+            })
+        else
+            WindUI:Notify({
+                Title = "错误",
+                Content = "无法找到角色或HumanoidRootPart",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- 2. 传送到原点
+Tab:Button({
+    Title = "传送到原点",
+    Description = "将角色传送到地图中心",
+    Callback = function()
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 100, 0)
+            WindUI:Notify({
+                Title = "传送",
+                Content = "已传送到地图中心",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- 3. 移动速度滑块
+local speedTab = Window:Tab({
+    Title = "移动速度",
+    Icon = "gauge",
+    Locked = false,
+})
+
+speedTab:Slider({
+    Title = "移动速度",
+    Description = "调整角色移动速度",
+    Value = { Min = 16, Max = 200, Default = 16 },
+    Callback = function(value)
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.WalkSpeed = value
+        end
+    end
+})
+
+-- 4. 跳跃高度滑块
+local jumpTab = Window:Tab({
+    Title = "跳跃高度",
+    Icon = "arrow-up",
+    Locked = false,
+})
+
+jumpTab:Slider({
+    Title = "跳跃高度",
+    Description = "调整角色跳跃高度",
+    Value = { Min = 50, Max = 500, Default = 50 },
+    Callback = function(value)
+        if player.Character and player.Character:FindFirstChild("Humanoid") then
+            player.Character.Humanoid.JumpPower = value
+        end
+    end
+})
+
+-- 5. 娱乐功能标签页
+local funTab = Window:Tab({
+    Title = "娱乐功能",
+    Icon = "gamepad-2",
+    Locked = false,
+})
+
+local danceAnimation
+
+funTab:Button({
+    Title = "跳舞模式",
+    Description = "让角色开始跳舞",
+    Callback = function()
+        if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+            -- 播放跳舞动画
+            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                -- 加载跳舞动画
+                local animation = Instance.new("Animation")
+                animation.AnimationId = "rbxassetid://181525546"  -- 默认跳舞动画
+                local track = humanoid:LoadAnimation(animation)
+                track:Play()
+                danceAnimation = track
+            end
+            WindUI:Notify({
+                Title = "娱乐功能",
+                Content = "已开启跳舞模式",
+                Duration = 3
+            })
+        end
+    end
+})
