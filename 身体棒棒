@@ -53,7 +53,7 @@ local Window = WindUI:CreateWindow({
 task.wait(0.3)
 
 Window:EditOpenButton({
-    Title = "GOBGOD",
+    Title = "STBB",
     Icon = "monitor",
     CornerRadius = UDim.new(0,6),  -- 小圆角
     StrokeThickness = 1,
@@ -65,6 +65,67 @@ Window:EditOpenButton({
 
 task.wait(0.2)
 
+-- 抽奖功能标签页
+local gachaTab = Window:Tab({
+    Title = "自动抽奖",
+    Icon = "gift",
+    Locked = false,
+})
+
+-- 自动抽奖开关
+getgenv().autoGacha = false
+local gachaConnection
+
+gachaTab:Toggle({
+    Title = "自动十连抽",
+    Description = "开启后自动进行十连抽",
+    Callback = function(value)
+        getgenv().autoGacha = value
+        if value then
+            WindUI:Notify({
+                Title = "自动抽奖",
+                Content = "已开启自动十连抽",
+                Duration = 3
+            })
+            -- 开始自动抽奖
+            gachaConnection = game:GetService("RunService").Heartbeat:Connect(function()
+                if getgenv().autoGacha then
+                    local args = {"10Spins"}
+                    pcall(function()
+                        game:GetService("ReplicatedStorage"):WaitForChild("GachaSkins"):FireServer(unpack(args))
+                    end)
+                    task.wait(1)  -- 1秒间隔
+                end
+            end)
+        else
+            if gachaConnection then
+                gachaConnection:Disconnect()
+            end
+            WindUI:Notify({
+                Title = "自动抽奖",
+                Content = "已停止自动抽奖",
+                Duration = 3
+            })
+        end
+    end
+})
+
+gachaTab:Button({
+    Title = "单次十连抽",
+    Description = "手动进行一次十连抽",
+    Callback = function()
+        local args = {"10Spins"}
+        pcall(function()
+            game:GetService("ReplicatedStorage"):WaitForChild("GachaSkins"):FireServer(unpack(args))
+        end)
+        WindUI:Notify({
+            Title = "抽奖",
+            Content = "已进行十连抽",
+            Duration = 3
+        })
+    end
+})
+
 -- 其他脚本标签页
 local scriptsTab = Window:Tab({
     Title = "其他脚本",
@@ -72,7 +133,6 @@ local scriptsTab = Window:Tab({
     Locked = false,
 })
 
--- 添加说明
 scriptsTab:Section({
     Title = "常用脚本",
     Description = "点击按钮加载对应脚本"
@@ -101,65 +161,6 @@ scriptsTab:Button({
         WindUI:Notify({
             Title = "脚本加载",
             Content = "已加载XA通用脚本",
-            Duration = 3
-        })
-    end
-})
-
-scriptsTab:Divider()
-
-scriptsTab:Section({
-    Title = "其他脚本",
-    Description = "更多实用脚本"
-})
-
-scriptsTab:Button({
-    Title = "无限跳跃脚本",
-    Description = "加载无限跳跃脚本",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-        WindUI:Notify({
-            Title = "脚本加载",
-            Content = "已加载无限跳跃脚本",
-            Duration = 3
-        })
-    end
-})
-
-scriptsTab:Button({
-    Title = "飞行脚本",
-    Description = "加载飞行脚本",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGui/main/FlyGuiV3.txt"))()
-        WindUI:Notify({
-            Title = "脚本加载",
-            Content = "已加载飞行脚本",
-            Duration = 3
-        })
-    end
-})
-
-scriptsTab:Button({
-    Title = "传送脚本",
-    Description = "加载传送脚本",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Roblox-Account-Manager/master/RAM.lua"))()
-        WindUI:Notify({
-            Title = "脚本加载",
-            Content = "已加载传送脚本",
-            Duration = 3
-        })
-    end
-})
-
-scriptsTab:Button({
-    Title = "透视脚本",
-    Description = "加载高级透视脚本",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE-Scripts/main/AimViewer"))()
-        WindUI:Notify({
-            Title = "脚本加载",
-            Content = "已加载透视脚本",
             Duration = 3
         })
     end
@@ -328,39 +329,6 @@ jumpTab:Slider({
     Callback = function(value)
         if player.Character and player.Character:FindFirstChild("Humanoid") then
             player.Character.Humanoid.JumpPower = value
-        end
-    end
-})
-
--- 5. 娱乐功能标签页
-local funTab = Window:Tab({
-    Title = "娱乐功能",
-    Icon = "gamepad-2",
-    Locked = false,
-})
-
-local danceAnimation
-
-funTab:Button({
-    Title = "跳舞模式",
-    Description = "让角色开始跳舞",
-    Callback = function()
-        if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
-            -- 播放跳舞动画
-            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-            if humanoid then
-                -- 加载跳舞动画
-                local animation = Instance.new("Animation")
-                animation.AnimationId = "rbxassetid://181525546"  -- 默认跳舞动画
-                local track = humanoid:LoadAnimation(animation)
-                track:Play()
-                danceAnimation = track
-            end
-            WindUI:Notify({
-                Title = "娱乐功能",
-                Content = "已开启跳舞模式",
-                Duration = 3
-            })
         end
     end
 })
