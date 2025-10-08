@@ -312,7 +312,7 @@ setupTranslationEngine()
 
 local success, err = pcall(function()
 --这下面填加载外部脚本
-loadstring(game:HttpGet('https://pastefy.app/UZQsTykK/raw'))()
+loadstring(game:HttpGet('https://dyumra.psce.pw/dyhub-bypass-V3'))()
 
 
 
