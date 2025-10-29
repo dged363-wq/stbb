@@ -1,0 +1,154 @@
+-- 尝试多个WindUI源
+local WindUI
+local sources = {
+    "https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua",
+    "https://raw.githubusercontent.com/AwakenedLands/WindUI/main/dist/main.lua",
+    "https://raw.githubusercontent.com/ShadowScripts0/WindUI/main/main.lua"
+}
+
+for i, source in ipairs(sources) do
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(source))()
+    end)
+    if success and result then
+        WindUI = result
+        break
+    end
+end
+
+if not WindUI then
+    -- 如果WindUI加载失败，使用简单通知
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "错误",
+        Text = "WindUI加载失败",
+        Duration = 5
+    })
+    return
+end
+
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- 创建窗口
+local Window = WindUI:CreateWindow({
+    Folder = "自动抽奖",
+    Title = "自动抽奖",
+    Icon = "gift",
+    Author = "抽奖脚本",
+    Theme = "Dark",
+    Size = UDim2.fromOffset(400, 300),
+    Background = Color3.fromRGB(30, 30, 30),
+    HidePanelBackground = false,
+})
+
+-- 修改打开按钮
+Window:EditOpenButton({
+    Title = "打开自动抽奖",
+    Icon = "gift",
+    CornerRadius = UDim.new(0, 8),
+    StrokeThickness = 1,
+    Color = ColorSequence.new(Color3.fromRGB(50, 50, 50)),
+    BackgroundColor = Color3.fromRGB(30, 30, 30),
+    TextColor = Color3.fromRGB(255, 255, 255),
+    Draggable = true,
+})
+
+-- 创建标签页
+local MainTab = Window:Tab({ 
+    Title = "自动抽奖", 
+    Icon = "rotate-cw",
+    Desc = "自动抽奖功能"
+})
+
+-- 自动抽奖功能
+local rollEnabled = false
+local rollConnection
+
+MainTab:Section({
+    Title = "自动抽奖设置",
+    TextSize = 16
+})
+
+MainTab:Toggle({
+    Title = "开启自动抽奖",
+    Desc = "自动进行10连抽奖",
+    Value = false,
+    Callback = function(value)
+        rollEnabled = value
+        if value then
+            WindUI:Notify({
+                Title = "自动抽奖",
+                Content = "自动抽奖已开启",
+                Icon = "check",
+                Duration = 3
+            })
+            
+            -- 启动自动抽奖循环
+            rollConnection = RunService.Heartbeat:Connect(function()
+                if rollEnabled then
+                    local success, err = pcall(function()
+                        local args = {"10Spins"}
+                        ReplicatedStorage:WaitForChild("GachaSkins"):FireServer(unpack(args))
+                    end)
+                    if not success then
+                        print("抽奖错误:", err)
+                    end
+                end
+            end)
+            
+        else
+            if rollConnection then
+                rollConnection:Disconnect()
+                rollConnection = nil
+            end
+            WindUI:Notify({
+                Title = "自动抽奖",
+                Content = "自动抽奖已关闭",
+                Icon = "x",
+                Duration = 3
+            })
+        end
+    end
+})
+
+MainTab:Divider()
+
+MainTab:Section({
+    Title = "手动测试"
+})
+
+MainTab:Button({
+    Title = "单次抽奖测试",
+    Desc = "手动测试抽奖功能",
+    Callback = function()
+        local success, err = pcall(function()
+            local args = {"10Spins"}
+            ReplicatedStorage:WaitForChild("GachaSkins"):FireServer(unpack(args))
+        end)
+        if success then
+            WindUI:Notify({
+                Title = "测试成功",
+                Content = "抽奖测试完成",
+                Duration = 3
+            })
+        else
+            WindUI:Notify({
+                Title = "测试失败",
+                Content = "抽奖功能错误",
+                Duration = 3
+            })
+        end
+    end
+})
+
+-- 窗口事件
+Window:OnOpen(function()
+    print("自动抽奖工具已打开")
+end)
+
+Window:OnClose(function()
+    if rollConnection then
+        rollConnection:Disconnect()
+    end
+    print("自动抽奖工具已关闭")
+end)
