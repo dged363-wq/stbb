@@ -5,6 +5,7 @@ local Translations = {
     ["Collect"] = "收集",
     ["Hubox"] = "攻击盒",
     ["Hibox"] = "攻击盒",
+    ["Hitchox"] = "攻击盒",
     ["Quest"] = "任务",
     ["Mastery"] = "精通",
     ["Codes"] = "代码",
@@ -12,18 +13,27 @@ local Translations = {
     ["Show"] = "显示",
     ["Skill"] = "技能",
     ["Esp"] = "透视",
+    ["Exp"] = "经验",
     ["Hitbox"] = "命中框",
     ["Main"] = "主菜单",
     ["Player"] = "玩家",
     ["Gamepass"] = "游戏通行证",
     ["Misc"] = "杂项",
     ["Information"] = "信息",
+    ["XMAS"] = "圣诞活动",
+    ["Xmas Gift System"] = "圣诞礼物系统",
     
     -- 通用术语
-    ["DYHUB"] = "DYHUB汉化",
+    ["DYHUB"] = "DYHUB",
+    ["ST : Blockade Battlefront | Free Version"] = "ST : 封锁前线 | 免费版",
     ["ST : Blockade Battlefront | Free Vee"] = "ST : 封锁前线 | 免费版",
     ["ST : Blockade Battlefront | Free V8"] = "ST : 封锁前线 | 免费版",
     ["ST : Blockade Battlefront | Free V"] = "ST : 封锁前线 | 免费版",
+    ["4.7.5"] = "4.7.5版本",
+    ["Language Settings"] = "语言设置",
+    ["Select Language"] = "选择语言",
+    ["English"] = "英语",
+    ["Auto Farm (NO FLUSH) - ALL IN ONE"] = "自动刷怪(无刷新) - 全能模式",
     
     -- 功能设置
     ["Feature Visual"] = "视觉功能",
@@ -45,14 +55,17 @@ local Translations = {
     ["RareLuckyBoost"] = "稀有幸运提升",
     ["LegendaryLuckyBoost"] = "传奇幸运提升",
     ["All"] = "全部",
+    ["Open 100 Gifts Now"] = "立即打开100个礼物",
     
     -- 扭蛋功能
     ["Feature Gacha"] = "扭蛋功能",
     ["Select Gacha"] = "选择扭蛋",
     ["Character Spins"] = "角色旋转",
     ["Auto Gacha Character"] = "自动扭蛋角色",
+    ["Auto Gacha Character (ULTRA FAST)"] = "自动扭蛋角色(极速)",
     ["Select Gacha Skin Spins"] = "选择皮肤扭蛋旋转",
     ["Auto Gacha Skin"] = "自动扭蛋皮肤",
+    ["Auto Gacha Skin (ULTRA FAST)"] = "自动扭蛋皮肤(极速)",
     ["Select Gac+"] = "选择扭蛋+",
     ["Auto Gacl"] = "自动扭蛋",
     ["1SpinLucky"] = "1次幸运旋转",
@@ -67,11 +80,13 @@ local Translations = {
     ["Select Redeem Codes"] = "选择兑换代码",
     ["Redeem Selected Codes"] = "兑换选定代码",
     ["Redeem Code All"] = "兑换所有代码",
+    ["Auto Open Gifts (ULTRA FAST)"] = "自动打开礼物(极速)",
     
     -- 精通功能
     ["Feature Mastery"] = "精通功能",
     ["Movement"] = "移动",
     ["Action Speed"] = "动作速度",
+    ["Attack Speed (Lower = Faster)"] = "攻击速度(越低越快)",
     ["Character List"] = "角色列表",
     ["Set Position"] = "设置位置",
     ["Set Distance to NPC"] = "设置NPC距离",
@@ -103,6 +118,8 @@ local Translations = {
     ["Auto Colt"] = "自动收集",
     ["Item Notify"] = "物品通知",
     ["Item Notif"] = "物品通知",
+    ["Auto Collect The Present (ULTRA FAST)"] = "自动收集礼物(极速)",
+    ["Collect Nearest Present"] = "收集最近的礼物",
     
     -- 透视功能
     ["Feature Esp"] = "透视功能",
@@ -124,7 +141,7 @@ local Translations = {
     ["Player Misc"] = "玩家杂项",
     ["No Clip"] = "穿墙模式",
     ["Infinity Jump"] = "无限跳跃",
-    ["Fly (Beta)"] = "飞行(测试版)",
+    ["Fly (V3)"] = "飞行(V3)",
     ["Enable JumpPower"] = "启用跳跃力量",
     ["Set Speed Value"] = "设置速度值",
     ["Enable Speed"] = "启用速度",
@@ -135,6 +152,9 @@ local Translations = {
     ["Feature Play"] = "游戏功能",
     ["Auto Ready"] = "自动准备",
     ["Auto Skip Helicopter"] = "自动跳过直升机",
+    ["Load Infinity Yield"] = "加载Infinity Yield",
+    ["Auto God Mode (IY Needed)"] = "自动无敌模式(需要IY)",
+    ["God Mode Health Threshold"] = "无敌模式血量阈值",
     ["Feature Vote"] = "投票功能",
     ["Set Vote"] = "设置投票",
     ["Auto Vote"] = "自动投票",
@@ -144,10 +164,12 @@ local Translations = {
     
     -- 商店相关
     ["Hourly Shop (Beta)"] = "每小时商店(测试版)",
+    ["Holmby Shop (Beta)"] = "霍姆比商店(测试版)",
     ["Set Auto Buy"] = "设置自动购买",
     ["Set Auto Buy Items"] = "设置自动购买物品",
     ["Set Amount Buy Items"] = "设置购买物品数量",
     ["Auto Buy"] = "自动购买",
+    ["Auto Buy (ULTRA FAST)"] = "自动购买(极速)",
     
     -- 新截图添加的翻译
     ["GoB"] = "游戏ID",
@@ -166,46 +188,10 @@ local Translations = {
     ["DYHUB Information"] = "DYHUB信息",
     
     ["确认选项"] = "确认选项",
-    ["底部"] = "底部",
-    
-    -- 其他文本
-    ["GOB"] = "游戏ID",
-    ["停止旁观"] = "停止旁观",
-    ["美观"] = "美观",
-    ["停止美观"] = "停止美观",
-    ["N/A"] = "不可用",
-    ["版本 8.0.7"] = "版本 8.0.7",
-    ["更多6.0了"] = "更多6.0了",
-    ["更多8.0.7"] = "更多8.0.7",
-    ["Data Version: Bugs/Under Fixing"] = "数据版本: 错误/修复中",
-    ["按下此菜单，以更改字符"] = "按下此菜单，以更改字符",
-    ["按下此处可查看以更改字符"] = "按下此处可查看以更改字符",
-    ["按下此处，以更改字符"] = "按下此处，以更改字符",
-    ["按下此处后，以更改字符"] = "按下此处后，以更改字符",
-    ["按下此处后，以便改字符"] = "按下此处后，以便改字符",
-    ["操作此处可以通过更改字符"] = "操作此处可以通过更改字符",
-    ["插入文字栏"] = "插入文字栏",
-    ["操作面板"] = "操作面板",
-    ["操作规则"] = "操作规则",
-    ["插图"] = "插图",
-    ["东方没有准备好"] = "东方没有准备好",
-    ["东环没有准备好"] = "东环没有准备好",
-    ["你还没有准备好"] = "你还没有准备好",
-    ["价格没有准备好"] = "价格没有准备好",
-    ["循环没有准备好"] = "循环没有准备好",
-    ["布尔没有准备好"] = "布尔没有准备好",
-    ["游戏没有电击"] = "游戏没有电击",
-    ["第六步有准备者"] = "第六步有准备者",
-    ["一贯不变有档套话"] = "一贯不变有档套话",
-    
-    -- 状态信息
-    ["PPS:"] = "包/秒:",
-    ["Ping:"] = "延迟:",
-    ["FPS:"] = "帧率:",
-    ["ms"] = "毫秒"
+    ["底部"] = "底部"
 }
 
--- 剩下的函数代码保持不变...
+-- 翻译函数
 local function translateText(text)
     if not text or type(text) ~= "string" then return text end
     
@@ -222,6 +208,7 @@ local function translateText(text)
     return text
 end
 
+-- 设置翻译引擎
 local function setupTranslationEngine()
     local success, err = pcall(function()
         local oldIndex = getrawmetatable(game).__newindex
@@ -306,16 +293,14 @@ local function setupTranslationEngine()
     end
 end
 
+-- 等待并启动翻译引擎
 task.wait(2)
-
 setupTranslationEngine()
 
+-- 加载外部脚本
 local success, err = pcall(function()
---这下面填加载外部脚本
-loadstring(game:HttpGet("https://dyhub.psce.pw/LoaderBP"))()
-
-
-
+    -- 这下面填加载外部脚本
+    loadstring(game:HttpGet("https://dyhub.psce.pw/LoaderBP"))()
 end)
 
 if not success then
