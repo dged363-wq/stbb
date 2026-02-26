@@ -1,152 +1,243 @@
-local StellarLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Potato5466794/GC-WTB/refs/heads/main/UI/WTB-UI.luau"))()
-if StellarLibrary:LoadAnimation() then StellarLibrary:StartLoad() end
-if StellarLibrary:LoadAnimation() then StellarLibrary:Loaded() end
+-- 尝试多个WindUI源
+local WindUI
+local sources = {
+    "https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua",
+    "https://raw.githubusercontent.com/AwakenedLands/WindUI/main/dist/main.lua",
+    "https://raw.githubusercontent.com/ShadowScripts0/WindUI/main/main.lua"
+}
 
-local Window = StellarLibrary:Window({
-    SubTitle = "UI by YUxingchen",
-    Size = UDim2.new(0, 500, 0, 320),
-    TabWidth = 140
+for i, source in ipairs(sources) do
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(source))()
+    end)
+    if success and result then
+        WindUI = result
+        break
+    end
+end
+
+if not WindUI then
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "错误",
+        Text = "WindUI加载失败",
+        Duration = 5
+    })
+    return
+end
+
+local player = game.Players.LocalPlayer
+
+-- 创建窗口，使用图片背景
+local Window = WindUI:CreateWindow({
+    Folder = "GachaSystem",
+    Title = "身体棒棒",
+    Icon = "gift",
+    Author = "Tech",
+    Theme = "Dark",
+    Size = UDim2.fromOffset(400, 300),  -- UI大小不变
+    Background = "rbxassetid://94512740386917",  -- 图片背景
 })
 
-local General = Window:Tab("主要", "rbxassetid://10723407389")
-local Tab3 = Window:Tab("刷取", "rbxassetid://10723415335")
-local Tab4 = Window:Tab("物品", "rbxassetid://10709782497")
-local Tab5 = Window:Tab("设置", "rbxassetid://10734950309")
-local Tab6 = Window:Tab("本地玩家", "rbxassetid://10747373176")
+-- 科技风打开按钮
+Window:EditOpenButton({
+    Title = "STBB",
+    Icon = "zap",
+    CornerRadius = UDim.new(0, 12),
+    StrokeThickness = 2,
+    Color = ColorSequence.new(Color3.fromRGB(0, 150, 255)),
+    BackgroundColor = Color3.fromRGB(20, 30, 50),
+    TextColor = Color3.fromRGB(220, 240, 255),
+    Draggable = true,
+})
 
--- 商店购买功能
-Tab4:Seperator("商店购买")
-Tab4:Button("购买脉冲步枪", function()
-    local args = {"Buy", "Pulse Rifle"}
-    game:GetService("ReplicatedStorage"):WaitForChild("ShopSystem"):FireServer(unpack(args))
-    StellarLibrary:Notify("已购买脉冲步枪", 3)
-end)
+-- 其他脚本标签页
+local scriptsTab = Window:Tab({
+    Title = "其他脚本",
+    Icon = "code",
+    Locked = false,
+})
 
-Tab4:Button("自动回血", function()
-    local args = {"Buy", "FillHP"}
-    game:GetService("ReplicatedStorage"):WaitForChild("ShopSystem"):FireServer(unpack(args))
-    StellarLibrary:Notify("已恢复生命值", 3)
-end)
+scriptsTab:Section({
+    Title = "🔧 常用脚本",
+    Description = "点击按钮加载对应脚本"
+})
 
-Tab4:Button("购买护甲", function()
-    local args = {"Buy", "Armor"}
-    game:GetService("ReplicatedStorage"):WaitForChild("ShopSystem"):FireServer(unpack(args))
-    StellarLibrary:Notify("已购买护甲", 3)
-end)
-
--- 自动抽奖功能
-Tab3:Seperator("自动抽奖")
-getgenv().autoGacha = false
-Tab3:Toggle("自动十连抽", function(value)
-    getgenv().autoGacha = value
-    StellarLibrary:Notify(value and "开始自动抽奖" or "停止自动抽奖", 3)
-    while getgenv().autoGacha do
-        local args = {"10Spins"}
-        pcall(function()
-            game:GetService("ReplicatedStorage"):WaitForChild("GachaSkins"):FireServer(unpack(args))
-        end)
-        task.wait(1)
+scriptsTab:Button({
+    Title = "🌐 DYHUB汉化",
+    Description = "加载DYHUB汉化脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/dged363-wq/stbb/c9e88e4daa28d88d850620ceab4288b48256ba9f/new%F0%9F%87%A8%F0%9F%87%B3DYHUB"))()
+        WindUI:Notify({
+            Title = "脚本加载",
+            Content = "已加载DYHUB汉化脚本",
+            Icon = "check",
+            Duration = 3
+        })
     end
-end)
+})
 
-Tab3:Button("单次十连抽", function()
-    local args = {"10Spins"}
-    game:GetService("ReplicatedStorage"):WaitForChild("GachaSkins"):FireServer(unpack(args))
-    StellarLibrary:Notify("已抽奖一次", 3)
-end)
-
--- 角色控制功能
-Tab6:Seperator("角色控制")
-Tab6:Button("重置人物", function()
-    local player = game.Players.LocalPlayer
-    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-        player.Character.HumanoidRootPart.CFrame = CFrame.new(0, -975, 0)
-        StellarLibrary:Notify("已重置角色", 3)
+scriptsTab:Button({
+    Title = "⚡ XA通用脚本", 
+    Description = "加载XA通用脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.gitcode.com/Xingtaiduan/Scripts/raw/main/Loader.lua"))()
+        WindUI:Notify({
+            Title = "脚本加载",
+            Content = "已加载XA通用脚本",
+            Icon = "check",
+            Duration = 3
+        })
     end
-end)
+})
 
-Tab6:Button("传送到原点", function()
-    local player = game.Players.LocalPlayer
-    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-        player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 100, 0)
-        StellarLibrary:Notify("已传送到中心", 3)
-    end
-end)
+-- 角色切换标签页
+local characterTab = Window:Tab({
+    Title = "角色切换",
+    Icon = "users",
+    Locked = false,
+})
 
--- 移动设置
-Tab6:Seperator("移动设置")
-Tab6:Slider("移动速度", 16, 200, 16, function(value)
-    local player = game.Players.LocalPlayer
-    if player.Character and player.Character:FindFirstChild("Humanoid") then
-        player.Character.Humanoid.WalkSpeed = value
-    end
-end)
+characterTab:Section({
+    Title = "👥 角色列表",
+    Description = "点击按钮切换对应角色"
+})
 
-Tab6:Slider("跳跃高度", 50, 500, 50, function(value)
-    local player = game.Players.LocalPlayer
-    if player.Character and player.Character:FindFirstChild("Humanoid") then
-        player.Character.Humanoid.JumpPower = value
-    end
-end)
-
--- 透视功能
-Tab5:Seperator("透视功能")
-local espEnabled = false
-Tab5:Toggle("玩家透视", function(value)
-    espEnabled = value
-    local player = game.Players.LocalPlayer
-    for _, otherPlayer in ipairs(game.Players:GetPlayers()) do
-        if otherPlayer ~= player and otherPlayer.Character then
-            if value then
-                local highlight = Instance.new("Highlight")
-                highlight.Parent = otherPlayer.Character
-                highlight.FillColor = Color3.fromRGB(255, 0, 0)
-            else
-                local highlight = otherPlayer.Character:FindFirstChildOfClass("Highlight")
-                if highlight then highlight:Destroy() end
-            end
+-- 重置人物功能（放在第一个位置）
+characterTab:Button({
+    Title = "🔄 重置人物",
+    Description = "将角色传送到虚空",
+    Callback = function()
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            player.Character.HumanoidRootPart.CFrame = CFrame.new(0, -975, 0)
+            WindUI:Notify({
+                Title = "重置人物",
+                Content = "已将角色传送到虚空",
+                Icon = "refresh-cw",
+                Duration = 3
+            })
+        else
+            WindUI:Notify({
+                Title = "错误",
+                Content = "无法找到角色或HumanoidRootPart",
+                Icon = "x",
+                Duration = 3
+            })
         end
     end
-    StellarLibrary:Notify(value and "透视已开启" or "透视已关闭", 3)
-end)
+})
 
--- 脚本加载功能
-Tab5:Seperator("脚本加载")
-Tab5:Button("DYHUB汉化版", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/dged363-wq/stbb/main/DYHUB汉化版"))()
-    StellarLibrary:Notify("已加载汉化脚本", 3)
-end)
+-- 无双角色
+characterTab:Button({
+    Title = "无双",
+    Description = "Jetpacked Double plunger",
+    Callback = function()
+        local args = {
+            [1] = "Jetpacked Double plunger",
+            [2] = 0
+        }
+        pcall(function()
+            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
+        end)
+        WindUI:Notify({
+            Title = "角色切换",
+            Content = "已切换到：无双",
+            Icon = "check",
+            Duration = 3
+        })
+    end
+})
 
-Tab5:Button("XA通用脚本", function()
-    loadstring(game:HttpGet("https://raw.gitcode.com/Xingtaiduan/Scripts/raw/main/Loader.lua"))()
-    StellarLibrary:Notify("已加载通用脚本", 3)
-end)
+-- 电爸角色
+characterTab:Button({
+    Title = "电死爸爸",
+    Description = "Energized TV",
+    Callback = function()
+        local args = {
+            [1] = "Energized TV",
+            [2] = 0
+        }
+        pcall(function()
+            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
+        end)
+        WindUI:Notify({
+            Title = "角色切换",
+            Content = "已切换到：电爸",
+            Icon = "check",
+            Duration = 3
+        })
+    end
+})
 
-Tab5:Button("飞行脚本", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/CN-MoRan/MoRan/main/%E9%A3%9E%E8%A1%8C%E8%84%9A%E6%9C%ACV3(%E5%85%A8%E6%B8%B8%E6%88%8F%E9%80%9A%E7%94%A8).txt"))()
-    StellarLibrary:Notify("已加载飞行脚本", 3)
-end)
+-- 天文大电视角色
+characterTab:Button({
+    Title = "天文大电视",
+    Description = "Astro Large TV man",
+    Callback = function()
+        local args = {
+            [1] = "Astro Large TV man",
+            [2] = 0
+        }
+        pcall(function()
+            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
+        end)
+        WindUI:Notify({
+            Title = "角色切换",
+            Content = "已切换到：天文大电视",
+            Icon = "check",
+            Duration = 3
+        })
+    end
+})
 
--- 原版基础功能
-General:Seperator("主要")
-Time = General:Label("执行器时间")
-function StellarLibraryTime()
-    local GameTime = math.floor(workspace.DistributedGameTime + 0.5)
-    local Hour = math.floor(GameTime / 60 ^ 2) % 24
-    local Minute = math.floor(GameTime / 60 ^ 1) % 60
-    local Second = math.floor(GameTime / 60 ^ 0) % 60
-    Time:Set("[游戏时间] : 时 : " .. Hour .. " 分 : " .. Minute .. " 秒 : " .. Second)
-end
-spawn(function() while task.wait() do pcall(StellarLibraryTime) end end)
+-- 山本角色
+characterTab:Button({
+    Title = "山本",
+    Description = "Head Captain Of The CCTV",
+    Callback = function()
+        local args = {
+            [1] = "Head Captain Of The CCTV",
+            [2] = 0
+        }
+        pcall(function()
+            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
+        end)
+        WindUI:Notify({
+            Title = "角色切换",
+            Content = "已切换到：山本",
+            Icon = "check",
+            Duration = 3
+        })
+    end
+})
 
-Client = General:Label("客户端")
-function StellarLibraryClient()
-    local Fps = workspace:GetRealPhysicsFPS()
-    Client:Set("[帧率] : " .. Fps)
-end
-spawn(function() while true do wait(0.1); StellarLibraryClient() end end)
+-- DJ马桶角色
+characterTab:Button({
+    Title = "DJ马桶",
+    Description = "DJ Toilet 2.0",
+    Callback = function()
+        local args = {
+            [1] = "DJ Toilet 2.0",
+            [2] = 0
+        }
+        pcall(function()
+            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
+        end)
+        WindUI:Notify({
+            Title = "角色切换",
+            Content = "已切换到：DJ马桶",
+            Icon = "check",
+            Duration = 3
+        })
+    end
+})
 
-General:Button("复制 Discord 链接", function()
-    setclipboard("https://discord.gg/FmMuvkaWvG")
-    StellarLibrary:Notify("已复制!", 3)
-end)
+-- 添加科技风标签
+Window:Tag({
+    Title = "高级模式",
+    Color = Color3.fromHex("#00ff9d")
+})
+
+Window:Tag({
+    Title = "v2.0",
+    Color = Color3.fromHex("#ff6b00")
+})
