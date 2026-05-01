@@ -1,20 +1,5 @@
--- 尝试多个WindUI源
-local WindUI
-local sources = {
-    "https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua",
-    "https://raw.githubusercontent.com/AwakenedLands/WindUI/main/dist/main.lua",
-    "https://raw.githubusercontent.com/ShadowScripts0/WindUI/main/main.lua"
-}
-
-for i, source in ipairs(sources) do
-    local success, result = pcall(function()
-        return loadstring(game:HttpGet(source))()
-    end)
-    if success and result then
-        WindUI = result
-        break
-    end
-end
+-- 使用可靠的 WindUI 源
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
 
 if not WindUI then
     game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -27,15 +12,22 @@ end
 
 local player = game.Players.LocalPlayer
 
--- 创建窗口，使用图片背景
+-- 创建窗口（删除背景图）
 local Window = WindUI:CreateWindow({
-    Folder = "GachaSystem",
-    Title = "身体棒棒",
-    Icon = "gift",
-    Author = "Tech",
+    Title = "STBB",
+    Icon = "zap",
+    Author = "STBB",
+    Folder = "STBB_Control",
+    Size = UDim2.fromOffset(550, 400),
+    MinSize = Vector2.new(500, 350),
+    MaxSize = Vector2.new(800, 600),
+    Transparent = true,
     Theme = "Dark",
-    Size = UDim2.fromOffset(400, 300),  -- UI大小不变
-    Background = "rbxassetid://94512740386917",  -- 图片背景
+    Resizable = true,
+    SideBarWidth = 180,
+    BackgroundImageTransparency = 0.3,
+    HideSearchBar = true,
+    ScrollBarEnabled = false,
 })
 
 -- 科技风打开按钮
@@ -53,38 +45,34 @@ Window:EditOpenButton({
 -- 其他脚本标签页
 local scriptsTab = Window:Tab({
     Title = "其他脚本",
-    Icon = "code",
-    Locked = false,
+    Icon = "code"
 })
 
 scriptsTab:Section({
-    Title = "🔧 常用脚本",
-    Description = "点击按钮加载对应脚本"
+    Title = "常用脚本"
 })
 
 scriptsTab:Button({
-    Title = "🌐 DYHUB汉化",
+    Title = "DYHUB汉化",
     Description = "加载DYHUB汉化脚本",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/dged363-wq/stbb/c9e88e4daa28d88d850620ceab4288b48256ba9f/new%F0%9F%87%A8%F0%9F%87%B3DYHUB"))()
         WindUI:Notify({
             Title = "脚本加载",
             Content = "已加载DYHUB汉化脚本",
-            Icon = "check",
             Duration = 3
         })
     end
 })
 
 scriptsTab:Button({
-    Title = "⚡ XA通用脚本", 
+    Title = "XA通用脚本",
     Description = "加载XA通用脚本",
     Callback = function()
         loadstring(game:HttpGet("https://raw.gitcode.com/Xingtaiduan/Scripts/raw/main/Loader.lua"))()
         WindUI:Notify({
             Title = "脚本加载",
             Content = "已加载XA通用脚本",
-            Icon = "check",
             Duration = 3
         })
     end
@@ -93,18 +81,16 @@ scriptsTab:Button({
 -- 角色切换标签页
 local characterTab = Window:Tab({
     Title = "角色切换",
-    Icon = "users",
-    Locked = false,
+    Icon = "users"
 })
 
 characterTab:Section({
-    Title = "👥 角色列表",
-    Description = "点击按钮切换对应角色"
+    Title = "角色控制"
 })
 
--- 重置人物功能（放在第一个位置）
+-- 重置人物
 characterTab:Button({
-    Title = "🔄 重置人物",
+    Title = "重置人物",
     Description = "将角色传送到虚空",
     Callback = function()
         if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
@@ -112,128 +98,83 @@ characterTab:Button({
             WindUI:Notify({
                 Title = "重置人物",
                 Content = "已将角色传送到虚空",
-                Icon = "refresh-cw",
                 Duration = 3
             })
         else
             WindUI:Notify({
                 Title = "错误",
                 Content = "无法找到角色或HumanoidRootPart",
-                Icon = "x",
                 Duration = 3
             })
         end
     end
 })
 
--- 无双角色
-characterTab:Button({
-    Title = "无双",
+characterTab:Section({
+    Title = "角色列表"
+})
+
+-- 角色切换函数
+local function switchCharacter(characterName, displayName)
+    local args = { characterName, 0 }
+    pcall(function()
+        game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
+    end)
+    WindUI:Notify({
+        Title = "角色切换",
+        Content = "已切换到：" .. displayName,
+        Duration = 3
+    })
+end
+
+-- 所有角色按钮
+characterTab:Button({ 
+    Title = "无双", 
     Description = "Jetpacked Double plunger",
-    Callback = function()
-        local args = {
-            [1] = "Jetpacked Double plunger",
-            [2] = 0
-        }
-        pcall(function()
-            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
-        end)
-        WindUI:Notify({
-            Title = "角色切换",
-            Content = "已切换到：无双",
-            Icon = "check",
-            Duration = 3
-        })
-    end
+    Callback = function() switchCharacter("Jetpacked Double plunger", "无双") end 
 })
 
--- 电爸角色
-characterTab:Button({
-    Title = "电死爸爸",
+characterTab:Button({ 
+    Title = "电死爸爸", 
     Description = "Energized TV",
-    Callback = function()
-        local args = {
-            [1] = "Energized TV",
-            [2] = 0
-        }
-        pcall(function()
-            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
-        end)
-        WindUI:Notify({
-            Title = "角色切换",
-            Content = "已切换到：电爸",
-            Icon = "check",
-            Duration = 3
-        })
-    end
+    Callback = function() switchCharacter("Energized TV", "电爸") end 
 })
 
--- 天文大电视角色
-characterTab:Button({
-    Title = "天文大电视",
+characterTab:Button({ 
+    Title = "天文大电视", 
     Description = "Astro Large TV man",
-    Callback = function()
-        local args = {
-            [1] = "Astro Large TV man",
-            [2] = 0
-        }
-        pcall(function()
-            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
-        end)
-        WindUI:Notify({
-            Title = "角色切换",
-            Content = "已切换到：天文大电视",
-            Icon = "check",
-            Duration = 3
-        })
-    end
+    Callback = function() switchCharacter("Astro Large TV man", "天文大电视") end 
 })
 
--- 山本角色
-characterTab:Button({
-    Title = "山本",
+characterTab:Button({ 
+    Title = "山本", 
     Description = "Head Captain Of The CCTV",
-    Callback = function()
-        local args = {
-            [1] = "Head Captain Of The CCTV",
-            [2] = 0
-        }
-        pcall(function()
-            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
-        end)
-        WindUI:Notify({
-            Title = "角色切换",
-            Content = "已切换到：山本",
-            Icon = "check",
-            Duration = 3
-        })
-    end
+    Callback = function() switchCharacter("Head Captain Of The CCTV", "山本") end 
 })
 
--- DJ马桶角色
-characterTab:Button({
-    Title = "DJ马桶",
+characterTab:Button({ 
+    Title = "DJ马桶", 
     Description = "DJ Toilet 2.0",
-    Callback = function()
-        local args = {
-            [1] = "DJ Toilet 2.0",
-            [2] = 0
-        }
-        pcall(function()
-            game:GetService("ReplicatedStorage"):WaitForChild("ForChangeCharacter"):FireServer(unpack(args))
-        end)
-        WindUI:Notify({
-            Title = "角色切换",
-            Content = "已切换到：DJ马桶",
-            Icon = "check",
-            Duration = 3
-        })
-    end
+    Callback = function() switchCharacter("DJ Toilet 2.0", "DJ马桶") end 
+})
+
+-- 信息标签页
+local infoTab = Window:Tab({
+    Title = "信息",
+    Icon = "info"
+})
+
+infoTab:Section({
+    Title = "关于"
+})
+
+infoTab:Label({
+    Title = "STBB 控制台 v2.0\n功能：角色切换 + 外部脚本加载"
 })
 
 -- 添加科技风标签
 Window:Tag({
-    Title = "高级模式",
+    Title = "ONLINE",
     Color = Color3.fromHex("#00ff9d")
 })
 
