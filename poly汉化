@@ -1,0 +1,261 @@
+local Translations = {
+    -- 主菜单
+    ["Core Farm Settings"] = "核心刷怪设置",
+    ["Auto Farms"] = "自动刷怪",
+    ["Combat Enhancements"] = "战斗增强",
+    ["Skill Keybinds"] = "技能键位绑定",
+    ["General Automation"] = "通用自动化",
+    ["Movement"] = "移动设置",
+    ["Camera"] = "相机设置",
+    ["World"] = "世界设置",
+    ["Visuals"] = "视觉效果",
+    ["Shop"] = "商店",
+    ["Matchmaking"] = "匹配设置",
+    ["Utility & Performance"] = "实用工具与性能",
+    ["Gacha & Rolling"] = "抽卡与滚动",
+    
+    -- Auto Farms
+    ["Enable Auto Farm"] = "启用自动刷怪",
+    ["Auto Farm"] = "自动刷怪",
+    ["Farm Movement Mode"] = "刷怪移动模式",
+    ["Tween"] = "缓动模式",
+    ["Tween is smooth, Teleport is instant"] = "缓动平滑，传送瞬移",
+    ["Farm Movement Speed"] = "刷怪移动速度",
+    ["Farm Astro Tokens"] = "刷取Astro代币",
+    ["Auto-Collect Map Items"] = "自动收集地图物品",
+    
+    -- Combat Enhancements
+    ["Face Nearest Enemy"] = "面朝最近敌人",
+    ["Flush Aura"] = "刷新光环",
+    ["Expand Enemy Hitboxes"] = "扩大敌人受击箱",
+    ["Enemies Hitbox Size"] = "敌人受击箱大小",
+    
+    -- Skill Keybinds
+    ["Sync Skills With Auto Farm"] = "技能与自动刷怪同步",
+    ["Restore Character Movement"] = "恢复角色移动",
+    ["Auto Skill Keys"] = "自动技能按键",
+    ["Keys the script will do automatically during combat."] = "脚本在战斗中会自动按下的按键。",
+    ["Enable Auto Skills"] = "启用自动技能",
+    ["Only uses skills when Auto Farm is targeting an enemy."] = "仅在自动刷怪锁定敌人时使用技能。",
+    ["Fixes your character if you can't move (Mainly on mobile)"] = "修复角色无法移动的问题（主要针对手机端）。",
+    
+    -- General Automation
+    ["Auto Skip Helicopter"] = "自动跳过直升机",
+    ["Auto Heal (Fill HP)"] = "自动回血",
+    ["Auto Buy Titan Upgrades"] = "自动购买泰坦升级",
+    ["Auto Upgrade Skill Tree"] = "自动升级技能树",
+    ["Auto Use Titan Requests"] = "自动使用泰坦请求",
+    
+    -- God Mode
+    ["God Mode"] = "无敌模式",
+    ["Enable God Mode"] = "启用无敌模式",
+    ["HP Threshold"] = "血量阈值",
+    
+    -- Movement
+    ["Custom Walk Speed"] = "自定义移速",
+    ["Walk Speed Amount"] = "移速数值",
+    ["Custom Jump Power"] = "自定义跳跃力度",
+    ["Jump Power Amount"] = "跳跃力度数值",
+    ["Infinite Jump"] = "无限跳跃",
+    ["Flight"] = "飞行",
+    ["Enable Flight"] = "启用飞行",
+    ["Flight Speed"] = "飞行速度",
+    
+    -- Camera
+    ["Custom Field of View (Not work properly)"] = "自定义视野（可能无效）",
+    ["FOV Amount (Broken)"] = "视野数值（无效）",
+    ["Unlock Max Camera Zoom"] = "解锁最大相机缩放",
+    ["Max Zoom Distance"] = "最大缩放距离",
+    
+    -- World / Matchmaking
+    ["Vote Difficulty"] = "投票难度",
+    ["Auto Vote For Mode"] = "自动投票模式",
+    ["Auto Ready"] = "自动准备",
+    
+    -- Visuals / ESP
+    ["Enemy ESP"] = "敌人透视",
+    ["Enable ESP Highlights"] = "启用透视高亮",
+    ["Show ESP Tracers"] = "显示透视轨迹线",
+    ["Highlight Color"] = "高亮颜色",
+    ["Tracer Color"] = "轨迹线颜色",
+    ["Lighting"] = "光照",
+    ["Fullbright"] = "全亮",
+    
+    -- Shop
+    ["Sit Jeffrey"] = "免疫杰弗里",
+    ["Helicopter Shop"] = "直升机商店",
+    ["Shop stuff to Buy"] = "商店物品购买",
+    ["Choose weapons to purchase automatically"] = "选择自动购买的武器",
+    ["Auto Buy"] = "自动购买",
+    ["Remove Helicopter Shop"] = "移除直升机商店",
+    
+    -- Gacha
+    ["Spin Amount"] = "抽卡次数",
+    ["Auto Roll Skins"] = "自动抽皮肤",
+    ["Auto Roll Characters"] = "自动抽角色",
+    
+    -- Hourly Shop
+    ["Hourly Shop"] = "每小时商店",
+    ["Hourly Items to Buy (W.I.P)"] = "每小时购买物品（开发中）",
+    ["Auto Buy Hourly Items"] = "自动购买每小时物品",
+    ["Buy Amount"] = "购买数量",
+    
+    -- Utility
+    ["Item Collector"] = "物品收集器",
+    ["Auto Collect Items"] = "自动收集物品",
+    ["Rewards & Codes"] = "奖励与兑换码",
+    ["Promotional Codes"] = "兑换码",
+    ["Redeem Selected Codes"] = "兑换选中兑换码",
+    ["Anti-Lag Optimizations"] = "反延迟优化",
+    ["Disable Visual Effects"] = "禁用视觉效果",
+    ["Disable 3D Rendering (Might not work mobile)"] = "禁用3D渲染（移动端可能无效）",
+    ["Anti-AFK"] = "防挂机踢出",
+    
+    -- 其他按钮/标签
+    ["Player"] = "玩家",
+    ["Mode"] = "模式",
+    ["Auto Skills"] = "自动技能",
+    
+    -- 通用自动化提示
+    ["Keeps your health full (Needs in-round money)"] = "保持生命值满（需要当局游戏内货币）",
+    
+    -- 无敌模式提示
+    ["Prevents your character from dying below a HP threshold."] = "防止你的角色在低于设定血量阈值时死亡。",
+    ["HP percentage at which God Mode activates."] = "触发无敌模式的血量百分比。",
+    
+    -- 自动刷怪提示
+    ["How quickly your character moves between targets."] = "角色在目标之间移动的速度。",
+    
+    -- 战斗增强提示
+    ["Rotates your character toward the closest target."] = "将你的角色转向最近的敌人。",
+    ["Increases enemy hitbox size to make them easier to hit."] = "增大敌人的受击箱体积，使其更容易被击中。",
+    
+    -- 移动设置提示
+    ["Overrides the default walk speed."] = "覆盖默认的移动速度。",
+    
+    -- 相机提示
+    ["Expands your camera viewing angle."] = "扩大你的相机视野角度。",
+    
+    -- 匹配提示
+    ["Choose which difficulty to automatically vote for."] = "选择自动投票的难度。",
+    
+    -- 反延迟/性能提示
+    ["Lowers quality and removes textures to improve FPS."] = "降低画质并移除纹理以提高帧数。",
+    ["Removes particles and clutter to boost performance."] = "移除粒子效果和杂项以提升性能。",
+    ["Stops rendering the 3D world. Ideal for overnight farming."] = "停止渲染3D世界，适合通宵挂机。",
+    ["Prevents Roblox from disconnecting you for idling."] = "防止Roblox因挂机而断开连接。",
+    
+    -- ESP提示
+    ["Lines from your position to targets."] = "从你的位置指向目标的线条。",
+    ["Color used to highlight enemies."] = "用于高亮敌人的颜色。",
+    ["Color of the directional lines to enemies."] = "指向敌人的方向线颜色。",
+    ["Makes the map completely bright."] = "让整个地图完全明亮。",
+    
+    -- 抽卡提示
+    ["For Gacha Skins"] = "用于抽奖皮肤",
+    ["For Gacha Characters"] = "用于抽奖角色",
+    
+    -- 每小时商店提示
+    ["Select items from the Hourly Shop to purchase automatically."] = "选择要自动购买的每小时商店物品。",
+    ["How many of each item to purchase."] = "每种物品的购买数量。",
+}
+
+-- 翻译引擎
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    if Translations[text] then return Translations[text] end
+    for en, cn in pairs(Translations) do
+        if text:find(en) then
+            return text:gsub(en, cn)
+        end
+    end
+    return text
+end
+
+local function setupTranslationEngine()
+    local success, err = pcall(function()
+        local oldIndex = getrawmetatable(game).__newindex
+        setreadonly(getrawmetatable(game), false)
+        
+        getrawmetatable(game).__newindex = newcclosure(function(t, k, v)
+            if (t:IsA("TextLabel") or t:IsA("TextButton") or t:IsA("TextBox")) and k == "Text" then
+                v = translateText(tostring(v))
+            end
+            return oldIndex(t, k, v)
+        end)
+        
+        setreadonly(getrawmetatable(game), true)
+    end)
+    
+    if not success then
+        warn("元表劫持失败:", err)
+        local translated = {}
+        local function scanAndTranslate()
+            for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+                if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                    pcall(function()
+                        local text = gui.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                gui.Text = translatedText
+                                translated[gui] = true
+                            end
+                        end
+                    end)
+                end
+            end
+            local player = game:GetService("Players").LocalPlayer
+            if player and player:FindFirstChild("PlayerGui") then
+                for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+                    if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                        pcall(function()
+                            local text = gui.Text
+                            if text and text ~= "" then
+                                local translatedText = translateText(text)
+                                if translatedText ~= text then
+                                    gui.Text = translatedText
+                                    translated[gui] = true
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end
+        
+        local function setupDescendantListener(parent)
+            parent.DescendantAdded:Connect(function(descendant)
+                if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                    task.wait(0.1)
+                    pcall(function()
+                        local text = descendant.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                descendant.Text = translatedText
+                            end
+                        end
+                    end)
+                end
+            end)
+        end
+        
+        pcall(setupDescendantListener, game:GetService("CoreGui"))
+        local player = game:GetService("Players").LocalPlayer
+        if player and player:FindFirstChild("PlayerGui") then
+            pcall(setupDescendantListener, player.PlayerGui)
+        end
+        
+        while true do
+            scanAndTranslate()
+            task.wait(3)
+        end
+    end
+end
+
+task.wait(2)
+setupTranslationEngine()
+
+-- 加载原始脚本
+loadstring(game:HttpGet("https://pastefy.app/dpTY8ZLT/raw"))()
